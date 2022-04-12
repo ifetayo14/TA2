@@ -22,47 +22,93 @@
 
 </head>
 
-<br><br>
-
 <body class="bg-gradient-primary">
 
     <div class="container">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="row justify-content-center">
+
+        <div class="card o-hidden border-0 shadow-lg my-5 col-lg-6">
             <div class="card-body p-0">
+                @if($message = \Illuminate\Support\Facades\Session::get('error'))
+                    <br>
+                    <div class="alert alert-danger">
+                        <p>
+                            {{$message}}
+                        </p>
+                    </div>
+                @endif
+                @if($message = \Illuminate\Support\Facades\Session::get('success'))
+                    <br>
+                    <div class="alert alert-success">
+                        <p>
+                            {{$message}}
+                        </p>
+                    </div>
+                @endif
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" method="post" action="{{url('registrationProcess')}}">
+                            <form class="user" method="post" action="{{url('registrationProcess')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName" name="firstName"
                                             placeholder="First Name">
+                                        <span style="color: red; font-size: 15px">
+                                            @error('firstName'){{$message}}@endif
+                                        </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName" name="lastName"
                                             placeholder="Last Name">
+                                        <span style="color: red; font-size: 15px">
+                                            @error('lastName'){{$message}}@endif
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email"
                                         placeholder="Email Address">
+                                    <span style="color: red; font-size: 15px">
+                                        @error('email'){{$message}}@endif
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="exampleLastName" name="age" placeholder="Age">
+                                    <span style="color: red; font-size: 15px">
+                                        @error('age'){{$message}}@endif
+                                    </span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user" name="password"
                                             id="exampleInputPassword" placeholder="Password">
+                                        <span style="color: red; font-size: 15px">
+                                            @error('password'){{$message}}@endif
+                                        </span>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user" name="repeatPassword"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <span style="color: red; font-size: 15px">
+                                            @error('repeatPassword'){{$message}}@endif
+                                        </span>
                                     </div>
+                                </div>
+                                <div class="form-group row">
+                                    <select style="width: 430px; margin-left: 15px" name="gender" class="form-control">
+                                        <option value="">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                    <span style="color: red; font-size: 15px; margin-left: 15px">
+                                        @error('gender'){{$message}}@endif
+                                    </span>
                                 </div>
                                 <br>
                                 <button href="login.blade.php" class="btn btn-primary btn-user btn-block">
@@ -82,6 +128,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </div>

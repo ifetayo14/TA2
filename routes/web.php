@@ -20,4 +20,14 @@ Route::get('/', function () {
 });
 
 Route::get('/registration', [PageController::class, 'showRegistration']);
+Route::get('/login', [PageController::class, 'showLogin']);
+Route::get('/dashboard', [PageController::class, 'dashboard']);
+Route::get('/showScrape', [PageController::class, 'showScrape']);
+Route::get('/showPromo', [PageController::class, 'showPromo']);
+Route::get('/showAkun', [PageController::class, 'showAkun']);
+//Route::get('/verif', [PageController::class, 'verif']);
+
+Route::get('/editAkun', [UsersController::class, 'edit']);
 Route::post('/registrationProcess', [UsersController::class, 'store']);
+Route::get('/verify/{email}', [UsersController::class, 'verify']);
+
